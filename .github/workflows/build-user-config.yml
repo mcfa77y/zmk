@@ -29,7 +29,7 @@ jobs:
     runs-on: self-hosted
     name: Fetch Build Keyboards
     outputs:
-      build_matrix: ${{ env.build_matrix }}
+      build_matrix: ${{ steps.set-matrix.outputs.build_matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,9 +38,11 @@ jobs:
         run: python3 -m pip install remarshal
 
       - name: Fetch Build Matrix
+        id: set-matrix
         run: |
-          echo "build_matrix=$(yaml2json '${{ inputs.build_matrix_path }}' | jq -c .)" >> $GITHUB_ENV
-          yaml2json "${{ inputs.build_matrix_path }}" | jq
+          matrix_json=$(yaml2json '${{ inputs.build_matrix_path }}' | jq -c .)
+          echo "build_matrix=$matrix_json" >> $GITHUB_OUTPUT
+          echo "$matrix_json" | jq
 
   build:
     runs-on: self-hosted

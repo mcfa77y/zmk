@@ -3,7 +3,10 @@
     "*.overlay": "dts",
     "*.keymap": "dts"
   },
-  "python.analysis.include": ["app/scripts", "zephyr/scripts"],
+  "python.analysis.include": [
+    "app/scripts",
+    "zephyr/scripts"
+  ],
   "[c]": {
     "editor.formatOnSave": true
   },
@@ -18,5 +21,6 @@
   "[css][json][jsonc][html][markdown][yaml]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "workbench.colorTheme": "Cobalt2"
 }
